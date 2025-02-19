@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+    <title>Movie App</title>
+  </head>
+  <body>
+    <header>
+      <h1>Movie App</h1>
+      <div class="auth-buttons">
+        <button id="loginBtn">Login</button>
+        <button id="registerBtn">Register</button>
+        <button id="logoutBtn" class="hidden">Logout</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="search">
+        <input type="text" placeholder="Search Movie..." />
+        <button>Search</button>
+      </div>
+      <div class="movies-container favorites">
+        <h1>Favorites</h1>
+        <div class="movies-grid"></div>
+      </div>
+      <div class="movies-container trending">
+        <h1>Trending</h1>
+        <div class="movies-grid"></div>
+      </div>
+    </div>
+
+    <div class="popup-container"></div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button id="loginSubmit">Login</button>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Register</h2>
+        <input type="email" id="registerEmail" placeholder="Email" />
+        <input type="password" id="registerPassword" placeholder="Password" />
+        <button id="registerSubmit">Register</button>
+      </div>
+    </div>
+  </body>
+</html>
