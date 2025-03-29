@@ -48,3 +48,8 @@ export async function fetchCurrentUser(token) {
 
   return userInfo;
 }
+
+export async function getUserByEmail(email) {
+  const knex = await getKnex();
+  return knex("users").where({ email }).first();
+}
