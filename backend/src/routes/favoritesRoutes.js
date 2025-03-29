@@ -2,11 +2,11 @@ import Router from "koa-router";
 import {
   addFavorite,
   getFavorites,
+  removeFavorite,
 } from "../controllers/favoritesController.js";
 
-const router = new Router({ prefix: "/favorites" });
+export const router = new Router();
 
-router.post("/", addFavorite);
-router.get("/", getFavorites);
-
-export { router as favoritesRouter };
+router.post("/favorites", addFavorite);
+router.get("/favorites", getFavorites);
+router.delete("/favorites", removeFavorite);
