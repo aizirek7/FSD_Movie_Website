@@ -1,6 +1,9 @@
 import bcrypt from "bcrypt";
-import { getKnex } from "../utils/knex.js";
-import { addUser, createToken } from "../services/authService.js";
+import {
+  addUser,
+  createToken,
+  getUserByEmail,
+} from "../services/authService.js";
 import Joi from "joi";
 
 export async function register(ctx) {
@@ -26,13 +29,11 @@ export async function login(ctx) {
 
   const { email, password } = await joiSchema.validateAsync(ctx.request.body);
 
-  const knex = await getKnex();
-  const dbUser = await knex("users").where({ email }).first();
+  const dbUser = await getUserByEmail(email);
 
   if (!dbUser) {
     ctx.status = 404;
     ctx.body = { error: "USER_NOT_FOUND" };
-
     return;
   }
 
@@ -40,8 +41,7 @@ export async function login(ctx) {
 
   if (!match) {
     ctx.status = 401;
-    ctx.body = { error: "login or password is uncorrect" };
-
+    ctx.body = { error: "login or password is incorrect" };
     return;
   }
 

@@ -4,6 +4,7 @@ import { HTTP_PORT } from "./utils/config.js";
 
 import { userRouter } from "./routes/userRoutes.js";
 import { authRouter } from "./routes/authRoutes.js";
+import { router } from "./routes/favoritesRoutes.js";
 
 import logger from "./middlewares/logger.js";
 import errorHandler from "./middlewares/errorHandler.js";
@@ -20,6 +21,8 @@ async function main() {
   app.use(authRouter.routes());
   app.use(authChecker);
   app.use(userRouter.routes());
+
+  app.use(router.routes());
 
   app.use(async (ctx) => {
     ctx.body = {
