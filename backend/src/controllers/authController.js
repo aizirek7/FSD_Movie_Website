@@ -1,10 +1,10 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
+import Joi from 'joi';
 import {
   addUser,
   createToken,
   getUserByEmail,
-} from "../services/authService.js";
-import Joi from "joi";
+} from '../services/authService.js';
 
 export async function register(ctx) {
   const joiSchema = Joi.object({
@@ -33,7 +33,7 @@ export async function login(ctx) {
 
   if (!dbUser) {
     ctx.status = 404;
-    ctx.body = { error: "USER_NOT_FOUND" };
+    ctx.body = { error: 'USER_NOT_FOUND' };
     return;
   }
 
@@ -41,7 +41,7 @@ export async function login(ctx) {
 
   if (!match) {
     ctx.status = 401;
-    ctx.body = { error: "login or password is incorrect" };
+    ctx.body = { error: 'login or password is incorrect' };
     return;
   }
 
@@ -49,5 +49,5 @@ export async function login(ctx) {
 
   ctx.status = 200;
   ctx.body = { ok: true, token };
-  ctx.cookies.set("token", token, { httpOnly: true });
+  ctx.cookies.set('token', token, { httpOnly: true });
 }

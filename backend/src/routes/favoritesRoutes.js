@@ -7,6 +7,6 @@ import {
 
 export const router = new Router();
 
-router.post("/favorites", addFavorite);
+router.post("favorites", addFavorite);
 router.get("/favorites", getFavorites);
 router.delete("/favorites", removeFavorite);

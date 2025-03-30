@@ -3,7 +3,7 @@ export default async function errorHandler(ctx, next) {
     await next();
   } catch (e) {
     if (e.isJoi) {
-      console.log("Joi error: ", e.message);
+      console.log('Joi error: ', e.message);
       ctx.status = 400;
       ctx.body = {
         errors: e.details,
@@ -12,7 +12,7 @@ export default async function errorHandler(ctx, next) {
       return;
     }
 
-    console.log("Error", e.message);
+    console.log('Error', e.message);
 
     ctx.status = e.status || 500;
     ctx.body = {

@@ -11,16 +11,24 @@ export default async function authChecker(ctx, next) {
   const error = new Error("NOT_AUTHORIZED");
   error.status = 401;
 
-  if (!token) {
-    throw error;
+  if (token) {
+    const userInfo = await fetchCurrentUser(token);
+    if (!userInfo) {
+      throw error;
+    }
+
+    ctx.state.user = userInfo;
+    return next();
   }
+  const cookie = ctx.cookies.get("token");
+  if (cookie) {
+    const userInfo = await fetchCurrentUser(cookie);
+    if (!userInfo) {
+      throw error;
+    }
 
-  const userInfo = await fetchCurrentUser(token);
-
-  if (!userInfo) {
-    throw error;
+    ctx.state.user = userInfo;
+    return next();
   }
-
-  ctx.state.user = userInfo;
-  return next();
+  throw error;
 }
